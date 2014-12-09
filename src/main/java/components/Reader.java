@@ -21,12 +21,12 @@ public class Reader extends Worker {
 		while (!stop) {
 			Node n = dictionary.get(id);
 			if (n != null) {
-				entries++;
+				entries = entries + 1;
 				for (int i = 0; i < delay; i++) {
 					dummy = (n.data + dummy) % 32767;
 				}
 			} else {
-				getf++;
+				getf = getf + 1;
 			}
 		}
 	}

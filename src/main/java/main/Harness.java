@@ -60,12 +60,13 @@ public class Harness {
 		// ***************************************
 		// statistic variables
 		
-		int subReads[] = new int[Readers];
-		int subWrites[] = new int[Writers];
-		int subGetf[] = new int[Readers];
+		double subReads[] = new double[Readers];
+		double subWrites[] = new double[Writers];
+		double subGetf[] = new double[Readers];
 		int dummies[] = new int[Readers + Writers];
-		int totalReads = 0, totalGetf = 0, totalWrites = 0, totalDummy = 0;
-		int averReads, averWrites;
+		double totalReads = 0, totalGetf = 0, totalWrites = 0;
+		int totalDummy = 0;
+		double averReads, averWrites;
 		
 		// ***************************************
 		

@@ -22,7 +22,7 @@ public class Writer extends Worker {
 		
 		while (!stop) {
 			dictionary.put(id, n);
-			entries++;
+			entries = entries + 1;
 			for (int i = 0; i < delay; i++) {
 				dummy = (n.data + dummy) % 32767;
 			}

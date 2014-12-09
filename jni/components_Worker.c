@@ -25,7 +25,7 @@ JNIEXPORT void JNICALL Java_components_Worker_cppSetAffinity
 
 	CPU_SET( cpu, &mask );
 
-	sched_setaffinity( tid, sizeof(cpu_set_t), &mask );
+	sched_setaffinity( 0, sizeof(cpu_set_t), &mask );
 #endif
 
 }

@@ -1,10 +1,10 @@
 echo ${1}
-export N=16
+ant clean
 ant build
 cd jni
 make
 cd ..
 cd target/classes/
-for i in {1..16}; do
-	$JAVA_HOME/bin/java -Djava.library.path=../../jni main.Harness dictionaries.${1} 20 $i 1 100
+for i in {1..32}; do
+	$JAVA_HOME/bin/java -Djava.library.path=../../jni main.Harness dictionaries.${1} 2 $i 1 100
 done

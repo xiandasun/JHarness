@@ -6,8 +6,8 @@ import dictionaries.IDictionary;
 public abstract class Worker extends Thread {
 	protected static IDictionary dictionary;
 	protected int id;
-	protected int entries;
-	protected int getf;
+	protected double entries;
+	protected double getf;
 	protected static int delay;
 	volatile static boolean start;
 	volatile static boolean stop;
@@ -54,11 +54,11 @@ public abstract class Worker extends Thread {
 		}
 	}
 	
-	public int getEntries() {
+	public double getEntries() {
 		return entries;
 	}
 	
-	public int getGetf() {
+	public double getGetf() {
 		return getf;
 	}
 	
