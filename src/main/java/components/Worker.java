@@ -13,7 +13,7 @@ public abstract class Worker extends Thread {
 	volatile static boolean stop;
 	
 	static {
-		//System.loadLibrary("AffinityLib");
+		System.loadLibrary("Affinity");
 	}
 	
 	private native void cppSetAffinity(long tid, int cpu);
@@ -26,7 +26,7 @@ public abstract class Worker extends Thread {
 		getf = 0;
 		id = simulatedId;
 		
-		//setAffinity();
+		setAffinity();
 	}
 	
 	public static void use(String dictionaryName) 
@@ -62,10 +62,10 @@ public abstract class Worker extends Thread {
 		return getf;
 	}
 	
-	/*public void setAffinity() {
+	public void setAffinity() {
 		int cores = Runtime.getRuntime().availableProcessors();
 		long tid = Thread.currentThread().getId();
 		int core = (32 + id) % cores;
 		cppSetAffinity(tid, core);
-	}*/
+	}
 }

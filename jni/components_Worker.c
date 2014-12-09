@@ -5,6 +5,8 @@
  *      Author: xianda
  */
 
+#define _GNU_SOURCE
+
 #include <jni.h>
 #include <stdio.h>
 #include <sched.h>
@@ -12,7 +14,7 @@
 #include "components_Worker.h"
 
 JNIEXPORT void JNICALL Java_components_Worker_cppSetAffinity
-  (JNIEnv *, jobject, jlong jid, jint jcpu) {
+  (JNIEnv *env, jobject obj, jlong jid, jint jcpu) {
 	long tid = jid;
 	int cpu = jcpu;
 
@@ -23,11 +25,7 @@ JNIEXPORT void JNICALL Java_components_Worker_cppSetAffinity
 
 	CPU_SET( cpu, &mask );
 
-	int rc = pthread_setaffinity_np( tid, sizeof(cpu_set_t), &mask );
-
-	if ( rc != 0 ) {
-		perror( "set affinity" );
-		abort();
-	} // if
+	sched_setaffinity( tid, sizeof(cpu_set_t), &mask );
 #endif
+
 }
