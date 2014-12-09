@@ -4,7 +4,7 @@ package dictionaries;
 
 import java.util.HashMap;
 
-import main.Node;
+import data.Node;
 
 public class SpinLockDictionary extends IDictionary {
 

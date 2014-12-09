@@ -1,15 +1,13 @@
 package components;
 
-import main.Node;
+import data.Node;
 
 public class Reader extends Worker {
 	// make sure delays are not ignored
 	private int dummy;
 	
 	public Reader(int rid) {
-		entries = 0;
-		getf = 0;
-		id = rid;
+		super(rid);
 		dummy = 0;
 	}
 	

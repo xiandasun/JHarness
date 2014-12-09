@@ -1,8 +1,7 @@
 package components;
 
+import data.Node;
 import dictionaries.IDictionary;
-import dictionaries.SpinLockDictionary;
-import main.Node;
 
 public abstract class Worker extends Thread {
 	protected static IDictionary dictionary;
@@ -13,16 +12,28 @@ public abstract class Worker extends Thread {
 	volatile static boolean start;
 	volatile static boolean stop;
 	
-	public Worker() {
+	static {
+		//System.loadLibrary("AffinityLib");
+	}
+	
+	private native void cppSetAffinity(long tid, int cpu);
+	
+	public Worker(int simulatedId) {
 		start = false;
 		stop = false;
 		delay = 0;
+		entries = 0;
+		getf = 0;
+		id = simulatedId;
+		
+		//setAffinity();
 	}
 	
 	public static void use(String dictionaryName) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		dictionary = (IDictionary) Class.forName(dictionaryName).newInstance();
 	}
+	
 	public abstract void run();
 	
 	public static void turnOn() {
@@ -50,4 +61,11 @@ public abstract class Worker extends Thread {
 	public int getGetf() {
 		return getf;
 	}
+	
+	/*public void setAffinity() {
+		int cores = Runtime.getRuntime().availableProcessors();
+		long tid = Thread.currentThread().getId();
+		int core = (32 + id) % cores;
+		cppSetAffinity(tid, core);
+	}*/
 }

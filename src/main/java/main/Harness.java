@@ -8,7 +8,7 @@ public class Harness {
 
 	public static void main(String[] args) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, InterruptedException {
-		if (args.length < 6) {
+		if (args.length < 5) {
 			System.out.println("Usage: java Harness Dictionary Time #Reader #Writer Delay");
 			for (int i = 0; i < args.length; i++) {
 				System.out.print(args[i] + " ");
@@ -16,11 +16,11 @@ public class Harness {
 			return;
 		}
 		
-		String DictionaryName = args[1];
-		int Time = Integer.parseInt(args[2]);
-		int Readers = Integer.parseInt(args[3]);
-		int Writers = Integer.parseInt(args[4]);
-		int Delay = Integer.parseInt(args[5]);
+		String DictionaryName = args[0];
+		int Time = Integer.parseInt(args[1]);
+		int Readers = Integer.parseInt(args[2]);
+		int Writers = Integer.parseInt(args[3]);
+		int Delay = Integer.parseInt(args[4]);
 		
 		Worker.use(DictionaryName);
 		Worker.populateDictionary(Readers + Writers);

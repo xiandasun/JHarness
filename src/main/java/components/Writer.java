@@ -1,15 +1,13 @@
 package components;
 
-import main.Node;
+import data.Node;
 
 public class Writer extends Worker {
 	// make sure delays are not ignored
 	private int dummy;
 	
-	public Writer(int rid) {
-		entries = 0;
-		getf = 0;
-		id = rid;
+	public Writer(int wid) {
+		super(wid);
 		dummy = 0;
 	}
 	

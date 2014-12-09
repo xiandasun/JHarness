@@ -1,6 +1,6 @@
 package dictionaries;
 
-import main.Node;
+import data.Node;
 
 public abstract class IDictionary {
 	public IDictionary() {
