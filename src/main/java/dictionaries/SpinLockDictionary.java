@@ -3,6 +3,8 @@ package dictionaries;
 // Java HashMap guarded by locks
 
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import data.Node;
 
@@ -11,12 +13,17 @@ public class SpinLockDictionary extends IDictionary {
 	private HashMap<Integer, Node> internalMap;
 	private Lock lock;
 	
+	/*
 	public class Lock {
 
-		private boolean isLocked = false;
+		private AtomicBoolean isLocked;// = false;
 
+		public Lock() {
+			isLocked = new AtomicBoolean(false);
+		}
+		
 		public synchronized void lock() {
-			while (isLocked) {
+			while (!isLocked.compareAndSet(false, true)) {
 				try {
 					wait();
 				} catch (InterruptedException e) {
@@ -24,18 +31,17 @@ public class SpinLockDictionary extends IDictionary {
 					e.printStackTrace();
 				}
 			}
-			isLocked = true;
 		}
 
 		public synchronized void unlock() {
-			isLocked = false;
+			isLocked.set(false);;
 			notify();
 		}
-	}
+	}*/
 	
 	public SpinLockDictionary() {
 		internalMap = new HashMap<Integer, Node>();
-		lock = new Lock();
+		lock = new ReentrantLock();
 	}
 	
 	@Override
@@ -71,3 +77,4 @@ public class SpinLockDictionary extends IDictionary {
 	}
 
 }
+

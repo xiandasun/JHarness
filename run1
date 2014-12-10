@@ -1,4 +1,4 @@
-echo ${1}
+echo ${1}-Delay${2}
 ant clean
 ant build
 cd jni
@@ -6,5 +6,5 @@ make
 cd ..
 cd target/classes/
 for i in {1..32}; do
-	$JAVA_HOME/bin/java -Djava.library.path=../../jni main.Harness dictionaries.${1} 2 $i 1 100
+	$JAVA_HOME/bin/java -Djava.library.path=../../jni main.Harness dictionaries.${1} 20 $i 1 ${2}
 done

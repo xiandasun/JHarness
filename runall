@@ -1,0 +1,4 @@
+dictionaries="SpinLockDictionary RwLockDictionary ConcurrentDictionary"
+for i in ${dictionaries}; do
+	./run1 ${i} 1
+done
