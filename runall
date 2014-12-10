@@ -1,4 +1,10 @@
-dictionaries="SpinLockDictionary RwLockDictionary ConcurrentDictionary"
+ant clean
+ant build
+cd jni
+make
+cd ..
+
+dictionaries="SpinLockDictionary RwLockDictionary JavaConcurrentDictionary"
 for i in ${dictionaries}; do
-	./run1 ${i} 1
+	./run1 ${i} 100
 done
