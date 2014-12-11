@@ -1,4 +1,4 @@
-echo "this script will run all the tests with operation delay of ${1} cycles and send the plotted graph to ${2}"
+echo "NOTE: This script will run all the tests with operation delay of ${1} cycles and send the plotted graph to ${2}"
 make
 mkdir results
 mkdir results/${1}
@@ -14,4 +14,4 @@ for i in $(ls *.script); do
 	gnuplot ${i}
 done
 
-(uuencode plot/*.ps results.ps; echo "FYI.") | mailx -s "results from linux.cs" ${2}
+(for graph in $(ls plot); do uuencode plot/${graph} ${graph}; done; echo "FYI.") | mailx -s "results from linux.cs" ${2}

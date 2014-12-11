@@ -19,7 +19,7 @@ for delay in $(ls results); do
 
 	echo "set xtics" >> plot-dicts-${delay}.script
 	echo "set ytics" >> plot-dicts-${delay}.script
-	echo "set logscale x" >> plot-dicts-${delay}.script
+	echo "set logscale y" >> plot-dicts-${delay}.script
 	echo "set grid xtics ytics" >> plot-dicts-${delay}.script
 	echo "show grid" >> plot-dicts-${delay}.script
 	echo "" >> plot-dicts-${delay}.script
