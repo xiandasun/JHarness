@@ -1,5 +1,17 @@
-dictionaries="SpinLockDictionary RwLockDictionary JavaConcurrentDictionary"
-for i in ${dictionaries}; do
+echo "this script will run all the tests with operation delay of ${1} cycles and send the plotted graph to ${2}"
+make
+mkdir results
+mkdir results/${1}
+for i in $(ls *[^I]Dictionary.java | sed -e 's/\..*$//'); do
 	echo $i
-	./run1 ${i} 1
+	./run1 ${i} ${1} >results/${1}/${i} 
 done
+
+./plotDictionaries
+
+for i in $(ls *.script); do
+	echo "plotting ${i}"
+	gnuplot ${i}
+done
+
+(uuencode plot/*.ps results.ps; echo "FYI.") | mailx -s "results from linux.cs" ${2}

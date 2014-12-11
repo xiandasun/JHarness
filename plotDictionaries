@@ -1,0 +1,54 @@
+# bash script for generating GNUPlot scripts
+
+echo "Generating..."
+
+mkdir plot
+
+declare -a files
+
+for delay in $(ls results); do
+	echo ${delay}
+	rm plot-dicts-${delay}.script
+	touch plot-dicts-${delay}.script
+	echo "set term postscript color" >> plot-dicts-${delay}.script
+	echo "set autoscale" >> plot-dicts-${delay}.script
+	echo "" >> plot-dicts-${delay}.script
+
+	echo "set output \"plot/dicts-delay${delay}.ps\"" >> plot-dicts-${delay}.script
+	echo "" >> plot-dicts-${delay}.script
+
+	echo "set xtics" >> plot-dicts-${delay}.script
+	echo "set ytics" >> plot-dicts-${delay}.script
+	echo "set logscale x" >> plot-dicts-${delay}.script
+	echo "set grid xtics ytics" >> plot-dicts-${delay}.script
+	echo "show grid" >> plot-dicts-${delay}.script
+	echo "" >> plot-dicts-${delay}.script
+
+	echo "set xlabel \"#readers\"" >> plot-dicts-${delay}.script
+	echo "set ylabel \"totalReads\"" >> plot-dicts-${delay}.script
+	echo "set title \"total reads #writer = 1 delay = ${delay}\"" >> plot-dicts-${delay}.script
+	echo "" >> plot-dicts-${delay}.script
+
+	files=$(ls results/${delay})	
+	first=""
+	for f in ${files}; do
+		first=${f}
+		break
+	done
+	last=""
+	for f in ${files}; do
+		last=${f}
+	done
+	for dict in ${files}; do
+		if [[ ${dict} == ${last} ]]
+		then
+			echo "  \"results/${delay}/${dict}\" using 1:3 with linespoints title \"${dict}\"" >> plot-dicts-${delay}.script
+		elif [[ ${dict} == ${first} ]]
+		then
+			echo "plot  \"results/${delay}/${dict}\" using 1:3 with linespoints title \"${dict}\", \\" >> plot-dicts-${delay}.script
+		else
+			echo "  \"results/${delay}/${dict}\" using 1:3 with linespoints title \"${dict}\", \\" >> plot-dicts-${delay}.script
+		fi
+	done
+done
+

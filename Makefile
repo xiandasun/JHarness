@@ -1,6 +1,9 @@
-.PHONY : clean jni-so
+SOURCE :=$(wildcard *.java)
+CLASS_NAMES := $(SOURCE:.java=.class)
 
-all : Harness.class SpinLockDictionary.class RwLockDictionary.class JavaConcurrentDictionary.class jni-so # build all executables
+.PHONY : clean jni-so
+ 
+all : $(CLASS_NAMES) jni-so # build all executables
 
 %.class : %.java ${MAKEFILE_NAME}
 	javac $<

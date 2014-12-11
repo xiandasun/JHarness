@@ -1,0 +1,5 @@
+rm -rf results
+rm -rf plot
+rm -rf *.script
+make clean
+
