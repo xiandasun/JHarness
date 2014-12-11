@@ -14,6 +14,8 @@ public class Harness {
 	int Readers = Integer.parseInt(args[2]);
 	int Writers = Integer.parseInt(args[3]);
 	int Delay = Integer.parseInt(args[4]);
+
+	//System.out.println(Delay);
 		
 	Worker.use(DictionaryName);
 	Worker.populateDictionary(Readers + Writers);

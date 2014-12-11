@@ -1,10 +1,15 @@
-echo "NOTE: This script will run all the tests with operation delay of ${1} cycles and send the plotted graph to ${2}"
-make
-mkdir results
-mkdir results/${1}
-for i in $(ls *[^I]Dictionary.java | sed -e 's/\..*$//'); do
-	echo $i
-	./run1 ${i} ${1} >results/${1}/${i} 
+./clean
+delay=1
+while [ ${delay} -lt 10000 ]; do
+	echo "NOTE: This script will run all the tests with operation delay of ${delay} cycles and send the plotted graph to ${1}"
+	make
+	mkdir results
+	mkdir results/${delay}
+	for i in $(ls *[^I]Dictionary.java | sed -e 's/\..*$//'); do
+		echo $i
+		./run1 ${i} ${delay} >results/${delay}/${i} 
+	done
+	let delay=delay*10
 done
 
 ./plotDictionaries
@@ -14,4 +19,4 @@ for i in $(ls *.script); do
 	gnuplot ${i}
 done
 
-(for graph in $(ls plot); do uuencode plot/${graph} ${graph}; done; echo "FYI.") | mailx -s "results from linux.cs" ${2}
+(for graph in $(ls plot); do uuencode plot/${graph} ${graph}; done; echo "FYI.") | mailx -s "results from linux.cs" ${1}

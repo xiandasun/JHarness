@@ -16,7 +16,6 @@ public abstract class Worker extends Thread {
     public Worker(int simulatedId) {
 	start = false;
 	stop = false;
-	delay = 0;
 	entries = 0;
 	getf = 0;
 	id = simulatedId;

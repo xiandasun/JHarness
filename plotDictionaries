@@ -10,8 +10,8 @@ for delay in $(ls results); do
 	echo ${delay}
 	rm plot-dicts-${delay}.script
 	touch plot-dicts-${delay}.script
-	echo "set term postscript color" >> plot-dicts-${delay}.script
-	echo "set autoscale" >> plot-dicts-${delay}.script
+	echo "set term postscript eps size 11.7, 8.3 color solid" >> plot-dicts-${delay}.script
+	echo "set size 0.7, 0.7" >> plot-dicts-${delay}.script
 	echo "" >> plot-dicts-${delay}.script
 
 	echo "set output \"plot/dicts-delay${delay}.ps\"" >> plot-dicts-${delay}.script
