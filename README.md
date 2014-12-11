@@ -4,6 +4,8 @@ JHarness
 Harness for dictionaries in Java version
 
 ========
+0. Set JAVA_HOME to the jdk directory so that the header file jni.h is in $JAVA_HOME/include directory.
+
 1. Build
   Under root directory:
 
