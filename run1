@@ -1,10 +1,11 @@
-echo ${1}-Delay${2}
-ant clean
-ant build
-cd jni
-make
-cd ..
-cd target/classes/
-for i in {1..50}; do
-	$JAVA_HOME/bin/java -Djava.library.path=../../jni main.Harness dictionaries.${1} 2 $i 1 ${2}
+#!/bin/sh -
+
+Time=2
+Writers=1
+Readers=32
+
+Reader=1
+while [ ${Reader} -le ${Readers} ] ; do
+    java -Djava.library.path=jni Harness ${1} ${Time} ${Reader} ${Writers} ${2}
+    Reader=`expr ${Reader} + 1`
 done

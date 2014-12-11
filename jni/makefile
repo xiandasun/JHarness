@@ -1,14 +1,20 @@
-CLASS_PATH = ../target/classes/
+# Define a variable for classpath
+CLASS_PATH = ../src/
 
 all : libAffinity.so
 
+# Define a virtual path for .class in the bin directory
 vpath %.class $(CLASS_PATH)
 
-libAffinity.so : components_Worker.o
+# $@ matches the target, $< matches the first dependancy
+libAffinity.so : Worker.o
 	gcc -m64 -Wall -g  -shared -o $@ $<
+#--add-stdcall-alias -shared -o $@ $<
 
-components_Worker.o : components_Worker.c components_Worker.h
-	gcc -m64 -I"$JAVA_HOME/include/" -c -fPIC $< -o $@
+# $@ matches the target, $< matches the first dependancy
+Worker.o : Worker.c Worker.h
+	gcc -m64 -I/usr/lib/jvm/java-7-openjdk-amd64/include/ -c -fPIC $< -o $@
 
-components_Worker.h : ../target/classes/components/Worker.class
-	javah -classpath $(CLASS_PATH) components.Worker
+# $* matches the target filename without the extension
+Worker.h : ../src/Worker.class
+	javah -classpath $(CLASS_PATH) Worker

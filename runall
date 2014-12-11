@@ -1,10 +1,5 @@
-ant clean
-ant build
-cd jni
-make
-cd ..
-
 dictionaries="SpinLockDictionary RwLockDictionary JavaConcurrentDictionary"
 for i in ${dictionaries}; do
-	./run1 ${i} 100
+	echo $i
+	./run1 ${i} 1
 done
